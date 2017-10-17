@@ -129,6 +129,9 @@ class Shoes
 
     def contents_alignment(_ = nil)
       position_contents
+      update_child_visibility
+
+      # Layout code expects height returned!
       determine_slot_height
     end
 
@@ -334,10 +337,14 @@ class Shoes
         super
 
         # Pass it along to all our children that they should update
-        contents.each(&:update_visibility)
+        update_child_visibility
       end
 
       self
+    end
+
+    def update_child_visibility
+      contents.each(&:update_visibility)
     end
   end
 
